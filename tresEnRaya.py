@@ -96,7 +96,7 @@ class TresEnRayaAPI:
     def getTablero(self):
         return self.board.grid
     
-    def mover(self, fila, columna):
+    def jugar(self, fila, columna):
         if self.estado != "En progreso":
             return False  
         
@@ -122,8 +122,8 @@ if __name__ == "__main__":
     api = TresEnRayaAPI()
     api.nuevaPartida()
 
-    api.mover(0, 0)
-    api.mover(1, 1)
+    api.jugar(0, 0)
+    api.jugar(1, 1)
 
     tablero = api.getTablero()
     estado = api.getEstado()
