@@ -54,9 +54,9 @@ class Board:
         return True
 
 class Game:
-    def __init__(self):
+    def __init__(self, player1, player2):
         self.board = Board()
-        self.players = [Player('X'), Player('O')]
+        self.players = [player1, player2]
 
     def run(self):  
         turn = 0
