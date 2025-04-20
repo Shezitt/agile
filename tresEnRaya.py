@@ -82,5 +82,53 @@ class Game:
             
             turn = (turn + 1) % 2
 
+class TresEnRayaAPI:
+    def __init__(self):
+        self.board = Board()
+        self.turno = 'X'
+        self.estado = "En progreso"
+
+    def nuevaPartida(self):
+        self.board = Board()
+        self.turno = 'X'
+        self.estado = "En progreso"
+
+    def getTablero(self):
+        return self.board.grid
+    
+    def mover(self, fila, columna):
+        if self.estado != "En progreso":
+            return False  
+        
+        if self.board.play(fila, columna, self.turno):
+            if self.board.checkWin(self.turno):
+                self.estado = self.turno
+            elif self.board.isFull():
+                self.estado = "Empate"
+            else:
+                self.turno = 'O' if self.turno == 'X' else 'X'
+            return True
+        else:
+            return False
+
+    def getEstado(self):
+        return self.estado
+
+    def getTurnoActual(self):
+        return self.turno
+
 if __name__ == "__main__":
-    Game().run()
+    # Game().run()
+    api = TresEnRayaAPI()
+    api.nuevaPartida()
+
+    api.mover(0, 0)
+    api.mover(1, 1)
+
+    tablero = api.getTablero()
+    estado = api.getEstado()
+    turno = api.getTurnoActual()
+
+    for fila in tablero:
+        print(fila)
+    print(f"el estado es {estado} y le toca al jugador {turno}")
